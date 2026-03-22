@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Looks Salon — Book an Appointment</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles/styles.css">
+<link rel="stylesheet" href="styles/booking.css">
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="mainNav">
+  <div class="nav-inner">
+  <!-- Logo left -->
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-img">
+      <img src="assets/images/logo.jpg" alt="Looks Salon Logo" width="65">
+    </div>
+    <div>
+      <span class="nav-logo-text">LOOKS</span>
+      <span class="nav-logo-sub">SALON</span>
+    </div>
+  </a>
+
+  <!-- Links center -->
+  <ul class="nav-links">
+    <li><a href="index.php">Home</a></li>
+    <li><a href="index.php#about">About</a></li>
+    <li><a href="index.php#services">Services</a></li>
+    <li><a href="index.php#gallery">Gallery</a></li>
+    <li><a href="index.php#contact">Contact</a></li>
+  </ul>
+
+  <!-- Right actions: Book Now + Hamburger -->
+  <div class="nav-actions">
+    <a href="booking.php" class="nav-book">Book Now</a>
+    <button class="nav-hamburger" id="hamburgerBtn" title="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-drawer-overlay" id="drawerOverlay"></div>
+<div class="nav-drawer" id="navDrawer">
+  <ul class="drawer-links">
+    <li><a href="index.php">Home</a></li>
+    <li><a href="index.php#about">About Us</a></li>
+    <li><a href="index.php#services">Services</a></li>
+    <li><a href="index.php#gallery">Gallery</a></li>
+    <li><a href="index.php#contact">Contact</a></li>
+  </ul>
+  <a href="booking.php" class="drawer-book">Book Appointment</a>
+</div>
+
+<!-- ── BOOKING MODAL ── -->
+<div class="modal" id="modal">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <div class="breadcrumb" id="breadcrumb">
+        <span class="breadcrumb-step active" id="bc-0" onclick="goToStep(0)">Services</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-step" id="bc-1" onclick="goToStep(1)">Professional</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-step" id="bc-2" onclick="goToStep(2)">Time</span>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-step" id="bc-3">Confirm</span>
+      </div>
+    </div>
+
+    <div class="modal-body">
+      <!-- Main pane -->
+      <div class="modal-main" id="modalMain">
+        <!-- Steps rendered by JS -->
+      </div>
+
+      <!-- Sidebar -->
+      <div class="modal-sidebar">
+        <div class="salon-card">
+          <div class="salon-thumb"><img src="assets/images/logo.jpg" alt="Looks Salon Logo" width="65"></div>
+          <div>
+            <div class="salon-name">Looks Salon</div>
+            <div class="salon-stars">
+              <span>★★★★★</span>
+              <span class="salon-rating">5.0</span>
+              <span class="salon-reviews">(186)</span>
+            </div>
+            <div class="salon-addr">Maharagama, Colombo</div>
+          </div>
+        </div>
+
+        <div class="summary-label">Your Booking</div>
+        <div id="summaryItems">
+          <div style="font-size:13px;color:var(--muted);">No services selected yet.</div>
+        </div>
+
+        <div class="summary-divider" id="summaryDivider" style="display:none;"></div>
+        <div class="summary-total" id="summaryTotal" style="display:none;">
+          <span>Total</span>
+          <span class="summary-total-price" id="summaryTotalPrice"></span>
+        </div>
+
+        <button class="continue-btn" id="continueBtn" onclick="nextStep()" disabled>Continue</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+// ── DATA ──
+const services = [
+  { id:1, name:'Hair Cut & Beard', dur:'1 hr', gender:'Male only', desc:'Refresh your look with a classic haircut paired with a neat beard trim.', price:4500, featured:true },
+  { id:2, name:'Hair Cut', dur:'1 hr', gender:'Male only', desc:'A professional haircut tailored to your style and preferences.', price:3000, featured:true },
+  { id:3, name:'Beard Trim', dur:'30 mins', gender:'Male only', desc:'Precise beard shaping with a clean, tidy finish.', price:2000, featured:true },
+  { id:4, name:'Oil Massage (15 min)', dur:'15 mins', gender:'', desc:'Relaxing scalp and head oil massage.', price:1200, featured:true },
+  { id:5, name:'Beard Grey Cover', dur:'5 mins', gender:'Male only', desc:'Quick grey coverage for a youthful finish.', price:800, featured:false },
+  { id:6, name:'Hair Colour', dur:'1.5 hrs', gender:'', desc:'Full hair colour treatment with premium products.', price:6500, featured:false },
+  { id:7, name:'Facial', dur:'45 mins', gender:'', desc:'Deep cleansing facial for glowing skin.', price:3500, featured:false },
+  { id:8, name:'Manicure', dur:'30 mins', gender:'', desc:'Clean, shape and buff with cuticle care.', price:1500, featured:false },
+];
+
+const professionals = [
+  { id:0, name:'Any Professional', role:'Maximum availability', initials:'✦', anyPro:true },
+  { id:1, name:'Vishwa', role:'Senior Stylist', initials:'V', rating:5 },
+  { id:2, name:'Rasika', role:'Senior Barber', initials:'R', rating:4.9 },
+  { id:3, name:'Nadeeshan', role:'Senior Barber', initials:'N', rating:4.8 },
+];
+
+// Booked slots for demo
+const bookedSlots = { '2026-3-23-V': ['09:00','10:00','11:00','12:00'], '2026-3-24-V': [] };
+
+// ── STATE ──
+let step = 0;
+let selectedServices = new Set();
+let selectedPro = null;
+let selectedDate = null;
+let selectedTime = null;
+let currentTab = 'featured';
+let calMonth = 2; // 0-indexed: March = 2
+let calYear = 2026;
+
+// ── HELPERS ──
+function fmt(price) { return 'LKR ' + price.toLocaleString(); }
+
+const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+function getDaysInMonth(y, m) { return new Date(y, m+1, 0).getDate(); }
+function getFirstDay(y, m) { return new Date(y, m, 1).getDay(); }
+
+function totalPrice() {
+  return [...selectedServices].reduce((s, id) => s + services.find(x=>x.id===id).price, 0);
+}
+
+// ── RENDER SUMMARY ──
+function renderSummary() {
+  const si = document.getElementById('summaryItems');
+  const sd = document.getElementById('summaryDivider');
+  const st = document.getElementById('summaryTotal');
+  const stp = document.getElementById('summaryTotalPrice');
+  const cb = document.getElementById('continueBtn');
+
+  if (selectedServices.size === 0) {
+    si.innerHTML = '<div style="font-size:13px;color:var(--muted);">No services selected yet.</div>';
+    sd.style.display = 'none'; st.style.display = 'none';
+  } else {
+    si.innerHTML = [...selectedServices].map(id => {
+      const s = services.find(x=>x.id===id);
+      const proLabel = selectedPro ? (selectedPro.anyPro ? 'any professional' : selectedPro.name) : 'any professional';
+      return `<div class="summary-item">
+        <div class="summary-item-info">
+          <div class="summary-item-name">${s.name}</div>
+          <div class="summary-item-meta">${s.dur}${s.gender?' · '+s.gender:''} · with ${proLabel}</div>
+        </div>
+        <div class="summary-item-price">${fmt(s.price)}</div>
+      </div>`;
+    }).join('');
+    sd.style.display = 'block'; st.style.display = 'flex';
+    stp.textContent = fmt(totalPrice());
+  }
+
+  // Update continue button state
+  let canContinue = false;
+  if (step === 0) canContinue = selectedServices.size > 0;
+  if (step === 1) canContinue = selectedPro !== null;
+  if (step === 2) canContinue = selectedDate !== null && selectedTime !== null;
+  if (step === 3) { const nok=customerName.trim().length>=2; const pok=/^[\d\s\+\-\(\)]{7,}$/.test(customerPhone.trim()); canContinue=nok&&pok; }
+  cb.disabled = !canContinue;
+  cb.textContent = step === 3 ? 'Confirm Booking' : 'Continue';
+}
+
+// ── BREADCRUMB ──
+function updateBreadcrumb() {
+  ['bc-0','bc-1','bc-2','bc-3'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    el.className = 'breadcrumb-step';
+    if (i < step) el.classList.add('done');
+    else if (i === step) el.classList.add('active');
+  });
+}
+
+// ── STEPS ──
+function renderStep() {
+  updateBreadcrumb();
+  const main = document.getElementById('modalMain');
+  if (step === 0) renderServices(main);
+  else if (step === 1) renderProfessionals(main);
+  else if (step === 2) renderTime(main);
+  else if (step === 3) renderConfirm(main);
+  renderSummary();
+}
+
+// STEP 0: Services
+function renderServices(main) {
+  const featured = services.filter(s => currentTab === 'featured' ? s.featured : !s.featured || true);
+  const list = currentTab === 'featured' ? services.filter(s => s.featured) : services;
+
+  main.innerHTML = `<div class="step-panel">
+    <h2 class="step-title">Choose your <span>Services</span></h2>
+    <div class="service-tabs">
+      <button class="tab ${currentTab==='featured'?'active':''}" onclick="switchTab('featured')">Featured</button>
+      <button class="tab ${currentTab==='all'?'active':''}" onclick="switchTab('all')">Hair & Beard</button>
+    </div>
+    <div class="section-label">Featured Services</div>
+    ${list.map(s => `
+      <div class="service-card ${selectedServices.has(s.id)?'selected':''}" onclick="toggleService(${s.id})">
+        <div class="service-info">
+          <div class="service-name">${s.name}</div>
+          <div class="service-meta">
+            <span>${s.dur}</span>
+            ${s.gender ? `<span class="service-meta-dot"></span><span>${s.gender}</span>` : ''}
+          </div>
+          <div class="service-desc">${s.desc}</div>
+          <div class="service-price">${fmt(s.price)}</div>
+        </div>
+        <button class="service-add-btn" onclick="event.stopPropagation();toggleService(${s.id})">
+          ${selectedServices.has(s.id) ? '✓' : '+'}
+        </button>
+      </div>`).join('')}
+  </div>`;
+}
+
+function switchTab(tab) {
+  currentTab = tab;
+  renderStep();
+}
+
+function toggleService(id) {
+  if (selectedServices.has(id)) selectedServices.delete(id);
+  else selectedServices.add(id);
+  renderStep();
+}
+
+// STEP 1: Professionals
+function renderProfessionals(main) {
+  main.innerHTML = `<div class="step-panel">
+    <h2 class="step-title">Select your <span>Professional</span></h2>
+    <div class="prof-grid">
+      ${professionals.map(p => `
+        <div class="prof-card ${selectedPro && selectedPro.id===p.id ? 'selected' : ''}" onclick="selectPro(${p.id})">
+          <div class="prof-avatar">${p.initials}</div>
+          <div class="prof-info">
+            <div class="prof-name">${p.name}</div>
+            <div class="prof-role">${p.role}</div>
+            ${p.rating ? `<div class="prof-stars"><span>${'★'.repeat(5)}</span></div>` : ''}
+          </div>
+          <button class="prof-select-btn">${selectedPro && selectedPro.id===p.id ? 'Selected' : 'Select'}</button>
+        </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function selectPro(id) {
+  selectedPro = professionals.find(p => p.id === id);
+  renderStep();
+}
+
+// STEP 2: Time
+function renderTime(main) {
+  const firstDay = getFirstDay(calYear, calMonth);
+  const daysInMonth = getDaysInMonth(calYear, calMonth);
+  const today = new Date();
+  const todayStr = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+
+  let calCells = '';
+  // Day labels
+  const dayLabels = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+  calCells += dayLabels.map(d => `<div class="cal-day-label">${d}</div>`).join('');
+
+  // Empty cells
+  for (let i = 0; i < firstDay; i++) calCells += `<div class="cal-day empty"></div>`;
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateStr = `${calYear}-${calMonth}-${d}`;
+    const isPast = new Date(calYear, calMonth, d) < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const isToday = dateStr === todayStr;
+    const isSelected = selectedDate === dateStr;
+    const cls = ['cal-day', isPast?'disabled':'', isToday?'today':'', isSelected?'selected':''].filter(Boolean).join(' ');
+    calCells += `<div class="${cls}" onclick="${isPast?'':'selectDate(\''+dateStr+'\')'}">${d}</div>`;
+  }
+
+  // Time slots
+  const times = ['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30'];
+  const proKey = selectedDate && selectedPro ? `${selectedDate}-${selectedPro.initials}` : null;
+  const booked = proKey && bookedSlots[proKey] ? bookedSlots[proKey] : [];
+
+  const slotsHtml = selectedDate ? `
+    <div class="slots-label">Available Times — ${selectedDate.split('-').slice(2).join('')} ${months[calMonth]}</div>
+    <div class="slots-grid">
+      ${times.map(t => {
+        const isBooked = booked.includes(t);
+        const isSel = selectedTime === t;
+        const cls = ['time-slot', isBooked?'booked':'', isSel?'selected':''].filter(Boolean).join(' ');
+        return `<div class="${cls}" onclick="${isBooked?'':'selectTime(\''+t+'\')'}">${t}</div>`;
+      }).join('')}
+    </div>` : `<div style="font-size:13px;color:var(--muted);padding:24px 0;">← Select a date to see available times.</div>`;
+
+  main.innerHTML = `<div class="step-panel">
+    <h2 class="step-title">Pick a <span>Date & Time</span></h2>
+    ${selectedPro && !selectedPro.anyPro ? `<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+      <div style="width:32px;height:32px;background:var(--grad-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--teal);font-size:14px;">${selectedPro.initials}</div>
+      <span style="font-size:14px;color:var(--muted);">with <strong style="color:var(--cream);">${selectedPro.name}</strong></span>
+    </div>` : ''}
+    <div class="calendar-header">
+      <span class="cal-month">${months[calMonth]} ${calYear}</span>
+      <div class="cal-nav">
+        <button class="cal-nav-btn" onclick="changeMonth(-1)">‹</button>
+        <button class="cal-nav-btn" onclick="changeMonth(1)">›</button>
+      </div>
+    </div>
+    <div class="cal-grid">${calCells}</div>
+    ${slotsHtml}
+  </div>`;
+}
+
+function selectDate(d) {
+  selectedDate = d; selectedTime = null;
+  renderStep();
+}
+function selectTime(t) {
+  selectedTime = t;
+  renderStep();
+}
+function changeMonth(dir) {
+  calMonth += dir;
+  if (calMonth < 0) { calMonth = 11; calYear--; }
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  renderStep();
+}
+
+// Customer detail state
+let customerName = '';
+let customerPhone = '';
+let customerNote = '';
+
+// STEP 3: Confirm
+function renderConfirm(main) {
+  const proName = selectedPro ? (selectedPro.anyPro ? 'Any Professional' : selectedPro.name) : '—';
+  const dateLabel = selectedDate ? selectedDate.split('-')[2] + ' ' + months[parseInt(selectedDate.split('-')[1])] + ' ' + selectedDate.split('-')[0] : '—';
+  const items = [...selectedServices].map(id => services.find(x=>x.id===id));
+
+  main.innerHTML = '<div class="step-panel">'
+    + '<h2 class="step-title">Confirm your <span>Booking</span></h2>'
+    + '<div class="confirm-grid">'
+    + '<div class="confirm-row"><div>'
+    +   '<div class="confirm-row-label">Services</div>'
+    +   '<div class="confirm-row-value">' + items.map(s=>s.name).join(', ') + '</div>'
+    + '</div><button class="confirm-row-edit" onclick="goToStep(0)">Edit</button></div>'
+    + '<div class="confirm-row"><div>'
+    +   '<div class="confirm-row-label">Professional</div>'
+    +   '<div class="confirm-row-value">' + proName + '</div>'
+    + '</div><button class="confirm-row-edit" onclick="goToStep(1)">Edit</button></div>'
+    + '<div class="confirm-row"><div>'
+    +   '<div class="confirm-row-label">Date & Time</div>'
+    +   '<div class="confirm-row-value">' + dateLabel + ' at ' + selectedTime + '</div>'
+    + '</div><button class="confirm-row-edit" onclick="goToStep(2)">Edit</button></div>'
+    + '<div class="confirm-row" style="flex-direction:column;align-items:flex-start;">'
+    +   '<div class="confirm-row-label">Total</div>'
+    +   '<div style="font-size:22px;font-weight:700;background:var(--grad-t);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">' + fmt(totalPrice()) + '</div>'
+    + '</div></div>'
+    + '<div class="customer-section">'
+    +   '<div class="customer-section-title">Your Details</div>'
+    +   '<div class="input-row">'
+    +     '<div class="input-group">'
+    +       '<label class="input-label" for="custName">Full Name <span style="color:var(--pink)">*</span></label>'
+    +       '<input class="text-input" id="custName" type="text" placeholder="e.g. Kasun Perera" oninput="customerName=this.value;liveValidate()" />'
+    +       '<span class="input-error" id="nameError">Please enter your full name.</span>'
+    +     '</div>'
+    +     '<div class="input-group">'
+    +       '<label class="input-label" for="custPhone">Phone Number <span style="color:var(--pink)">*</span></label>'
+    +       '<input class="text-input" id="custPhone" type="tel" placeholder="e.g. 077 123 4567" oninput="customerPhone=this.value;liveValidate()" />'
+    +       '<span class="input-error" id="phoneError">Please enter a valid phone number.</span>'
+    +     '</div>'
+    +   '</div>'
+    +   '<div class="input-group">'
+    +     '<label class="input-label" for="custNote">Special Requests <span style="color:var(--muted);font-weight:300;">(optional)</span></label>'
+    +     '<textarea class="text-input" id="custNote" rows="3" placeholder="Any notes for your stylist..." style="resize:none;" oninput="customerNote=this.value"></textarea>'
+    +   '</div>'
+    + '</div>'
+    + '</div>';
+
+  // Restore saved values
+  const n = document.getElementById('custName');
+  const p = document.getElementById('custPhone');
+  const nt = document.getElementById('custNote');
+  if (n) n.value = customerName;
+  if (p) p.value = customerPhone;
+  if (nt) nt.value = customerNote;
+  updateConfirmBtn();
+}
+
+function liveValidate() {
+  updateConfirmBtn();
+}
+
+function updateConfirmBtn() {
+  const cb = document.getElementById('continueBtn');
+  if (!cb) return;
+  const nameOk = customerName.trim().length >= 2;
+  const phoneOk = /^[\d\s\+\-\(\)]{7,}$/.test(customerPhone.trim());
+  cb.disabled = !(nameOk && phoneOk);
+}
+
+function validateAndConfirm() {
+  const nameOk = customerName.trim().length >= 2;
+  const phoneOk = /^[\d\s\+\-\(\)]{7,}$/.test(customerPhone.trim());
+  const nameEl  = document.getElementById('custName');
+  const phoneEl = document.getElementById('custPhone');
+  const nameErr = document.getElementById('nameError');
+  const phoneErr= document.getElementById('phoneError');
+  if (nameEl)  nameEl.classList.toggle('error', !nameOk);
+  if (nameErr) nameErr.classList.toggle('show', !nameOk);
+  if (phoneEl) phoneEl.classList.toggle('error', !phoneOk);
+  if (phoneErr)phoneErr.classList.toggle('show', !phoneOk);
+  return nameOk && phoneOk;
+}
+
+// ── NAVIGATION ──
+function nextStep() {
+  if (step === 3) {
+    if (!validateAndConfirm()) return;
+    confirmBooking();
+    return;
+  }
+  step++;
+  renderStep();
+}
+
+function goToStep(s) {
+  if (s >= step && s !== 0) return;
+  if (s <= step) { step = s; renderStep(); }
+}
+
+function confirmBooking() {
+  const main = document.getElementById('modalMain');
+  document.getElementById('continueBtn').style.display = 'none';
+  const proName = selectedPro ? (selectedPro.anyPro ? 'any professional' : selectedPro.name) : 'a professional';
+  const dateLabel = selectedDate ? selectedDate.split('-')[2] + ' ' + months[parseInt(selectedDate.split('-')[1])] : '';
+  const ref = 'LKS-' + Math.random().toString(36).substr(2,6).toUpperCase();
+  const firstName = customerName.trim().split(' ')[0];
+
+  const html = [
+    '<div class="success-view">',
+    '<div class="success-icon">\u2713</div>',
+    '<div class="success-title">You are all set, ' + firstName + '!</div>',
+    '<div class="success-sub">Your appointment at <strong>Looks Salon</strong> has been confirmed for <strong>' + dateLabel + '</strong> at <strong>' + selectedTime + '</strong> with <strong>' + proName + '</strong>.<br><br>We will reach out to <strong>' + customerPhone + '</strong> if anything changes.</div>',
+    '<div class="success-ref">Ref: ' + ref + '</div>',
+    '<button class="open-btn" onclick="resetModal()" style="margin-top:8px;">Book Another</button>',
+    '</div>'
+  ].join('');
+  main.innerHTML = html;
+
+  ['bc-0','bc-1','bc-2','bc-3'].forEach(function(id) {
+    document.getElementById(id).className = 'breadcrumb-step done';
+  });
+}
+
+function resetModal() {
+  step = 0;
+  selectedServices = new Set();
+  selectedPro = null;
+  selectedDate = null;
+  selectedTime = null;
+  customerName = '';
+  customerPhone = '';
+  customerNote = '';
+  document.getElementById('continueBtn').style.display = '';
+  renderStep();
+}
+
+// ── MODAL OPEN/CLOSE ──
+function openModal() {
+  renderStep();
+}
+function closeModal() {
+  // No overlay to close
+}
+// Close on backdrop click - removed since no overlay
+// document.getElementById('modalOverlay').addEventListener('click', function(e) {
+//   if (e.target === this) closeModal();
+// });
+
+// Initialize modal on load
+document.addEventListener('DOMContentLoaded', function() {
+  renderStep();
+});
+
+</script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

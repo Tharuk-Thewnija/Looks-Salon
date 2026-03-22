@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Looks Salon — Maharagama</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="mainNav">
+  <div class="nav-inner">
+  <!-- Logo left -->
+  <a href="index.php" class="nav-logo">
+    <div class="nav-logo-img">
+      <img src="assets/images/logo.jpg" alt="Looks Salon Logo" width="65">
+    </div>
+    <div>
+      <span class="nav-logo-text">LOOKS</span>
+      <span class="nav-logo-sub">SALON</span>
+    </div>
+  </a>
+
+  <!-- Links center -->
+  <ul class="nav-links">
+    <li><a href="index.php">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+  <!-- Right actions: Book Now + Hamburger -->
+  <div class="nav-actions">
+    <a href="booking.php" class="nav-book">Book Now</a>
+    <button class="nav-hamburger" id="hamburgerBtn" title="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-drawer-overlay" id="drawerOverlay"></div>
+<div class="nav-drawer" id="navDrawer">
+  <ul class="drawer-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="booking.php" class="drawer-book">Book Appointment</a>
+</div>
+
+<!-- ══ HERO — full-screen video ══ -->
+<div class="hero" id="home">
+
+  <!--
+    ════════════════════════════════════════════════════════════
+    TO ADD YOUR OWN VIDEO:
+    Replace the src attributes below with your video file path.
+    Example: src="videos/salon-bg.mp4"
+    Supported formats: mp4 (recommended), webm, ogg
+    Tips:
+      - Keep video under 10MB for fast loading
+      - Use a short loop (10–20 seconds)
+      - Compress with HandBrake or Cloudconvert
+    ════════════════════════════════════════════════════════════
+  -->
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="assets/videos/salon-bg.mp4" type="video/mp4">
+  </video>
+
+  <!-- Fallback background image (shown if video doesn't load) -->
+  <div class="hero-video-fallback"></div>
+
+<!-- Overlays -->
+  <div class="hero-overlay"></div>
+  <div class="hero-color-wash"></div>
+
+  <!-- Content -->
+  <div class="hero-content">
+
+    <h1 class="hero-h1">
+      Experience the<br/>
+      <em>Looks Salon</em>
+    </h1>
+    <p class="hero-sub">Where expert care meets luxurious services for a transformative beauty experience in Sri Lanka.</p>
+    <div class="hero-btns">
+      <a href="booking.php" class="btn-g">Book Appointment</a>
+      <a href="#services" class="btn-o">Our Services</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ STATS ══ -->
+<div class="stats-row">
+  <div class="stat"><div class="stat-n">14K+</div><div class="stat-l">Instagram Followers</div></div>
+  <div class="stat"><div class="stat-n">545+</div><div class="stat-l">Happy Clients</div></div>
+  <div class="stat"><div class="stat-n">94%</div><div class="stat-l">Satisfaction Rate</div></div>
+  <div class="stat"><div class="stat-n">10+</div><div class="stat-l">Years of Excellence</div></div>
+</div>
+
+<!-- ══ ABOUT ══ -->
+<section id="about" class="about-section">
+
+  <!-- Centered text -->
+  <div class="about-text">
+    <span class="ey">About Us</span>
+  </div>
+
+  <div class="about-row">
+    <div class="about-text-left">
+      <h2 class="st center-align-text">Crafted for the<br/><em>Modern You</em></h2>
+      <div class="g-line"></div>
+      <p>Looks Salon is Maharagama's go-to destination for hair, grooming, and beauty. Our team of passionate stylists brings precision and creativity to every appointment.</p>
+      <p>Whether you're in for a sharp barber cut, a bold colour transformation, or a complete bridal makeover — every visit is personal, every detail is intentional.</p>
+      <a href="#services" class="btn-g center-align-box">See Our Services</a>
+    </div>
+
+    <div class="about-imgs">
+      <div class="about-img-card">
+        <img src="assets/images/about1.jpg" alt="Barber Cut"/>
+        <div class="about-img-label">Chandana Wijesinghe</div>
+      </div>
+      <div class="about-img-card">
+        <img src="assets/images/about2.jpg" alt="Beauty & Skin"/>
+        <div class="about-img-label">Looks Salon Premises</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══ SERVICES ══ -->
+<section id="services" class="svc-section">
+  <div class="svc-header-wrap">
+    <div class="ey">Our Services</div>
+    <h2 class="svc-big-title">Where Style Meets<br/><em>Precision</em></h2>
+  </div>
+
+<div class="svc-grid">
+
+    <a href="booking.php" class="svc-tile svc-bg-1">
+      <div class="svc-tile-inner">
+        <img src="assets/images/i.jpg" alt="">
+        <div class="svc-tile-name">Barber Cuts</div>
+      </div>
+    </a>
+
+    <a href="booking.php" class="svc-tile svc-bg-2">
+      <div class="svc-tile-inner">
+        <div class="svc-tile-name">Beard Grooming</div>
+      </div>
+    </a>
+
+    <a href="booking.php" class="svc-tile svc-bg-3">
+      <div class="svc-tile-inner">
+        <div class="svc-tile-name">Hair Colour</div>
+      </div>
+    </a>
+
+    <a href="booking.php" class="svc-tile svc-bg-4">
+      <div class="svc-tile-inner">
+        <div class="svc-tile-name">Makeup</div>
+      </div>
+    </a>
+
+    <a href="booking.php" class="svc-tile svc-bg-5">
+      <div class="svc-tile-inner">
+        <div class="svc-tile-name">Skin &amp; Facial</div>
+      </div>
+    </a>
+
+    <a href="booking.php" class="svc-tile svc-bg-6">
+      <div class="svc-tile-inner">
+        <div class="svc-tile-name">Hair Styling</div>
+      </div>
+    </a>
+
+</div>
+
+
+</section>
+
+<!-- ══ GALLERY ══ -->
+<div class="gal-section" id="gallery">
+  <div class="gal-hd">
+    <span class="ey">Our Work</span>
+    <h2 class="st">The <em>Gallery</em></h2>
+  </div>
+
+  <!-- Horizontal Photo Strip -->
+  <div class="gal-strip-wrap">
+    <div class="gal-strip" id="galStrip">
+
+      <!-- Set A -->
+      <div class="gal-photo-card">
+        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=500&q=80" alt="Barber Cut" loading="lazy"/>
+        <div class="gal-photo-label">Barber Cut</div>
+      </div>
+      <div class="gal-photo-card">
+        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=500&q=80" alt="Facial" loading="lazy"/>
+        <div class="gal-photo-label">Facial</div>
+      </div>
+      <div class="gal-photo-card">
+        <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=500&q=80" alt="Fade & Taper" loading="lazy"/>
+        <div class="gal-photo-label">Fade & Taper</div>
+      </div>
+      <div class="gal-photo-card">
+        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&q=80" alt="Styling" loading="lazy"/>
+        <div class="gal-photo-label">Styling</div>
+      </div>
+      <div class="gal-photo-card">
+        <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=500&q=80" alt="Beard Grooming" loading="lazy"/>
+        <div class="gal-photo-label">Beard Grooming</div>
+      </div>
+      <div class="gal-photo-card">
+        <img src="https://images.unsplash.com/photo-1460533893735-45cea2212645?w=500&q=80" alt="Colour" loading="lazy"/>
+        <div class="gal-photo-label">Colour</div>
+      </div>
+      <div class="gal-photo-card">
+        <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=500&q=80" alt="Bridal Makeup" loading="lazy"/>
+        <div class="gal-photo-label">Bridal Makeup</div>
+      </div>
+      <div class="gal-photo-card">
+        <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=500&q=80" alt="Skin Care" loading="lazy"/>
+        <div class="gal-photo-label">Skin Care</div>
+      </div>
+
+      <!-- Set B — duplicate for seamless loop -->
+      <div class="gal-photo-card">
+        <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=500&q=80" alt="Barber Cut" loading="lazy"/>
+        <div class="gal-photo-label">Barber Cut</div>
+      </div>
+      <div class="gal-photo-card">
+        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=500&q=80" alt="Facial" loading="lazy"/>
+        <div class="gal-photo-label">Facial</div>
+      </div>
+      <div class="gal-photo-card">
+        <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=500&q=80" alt="Fade & Taper" loading="lazy"/>
+        <div class="gal-photo-label">Fade & Taper</div>
+      </div>
+      <div class="gal-photo-card">
+        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&q=80" alt="Styling" loading="lazy"/>
+        <div class="gal-photo-label">Styling</div>
+      </div>
+      <div class="gal-photo-card">
+        <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=500&q=80" alt="Beard Grooming" loading="lazy"/>
+        <div class="gal-photo-label">Beard Grooming</div>
+      </div>
+      <div class="gal-photo-card">
+        <img src="https://images.unsplash.com/photo-1460533893735-45cea2212645?w=500&q=80" alt="Colour" loading="lazy"/>
+        <div class="gal-photo-label">Colour</div>
+      </div>
+      <div class="gal-photo-card">
+        <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=500&q=80" alt="Bridal Makeup" loading="lazy"/>
+        <div class="gal-photo-label">Bridal Makeup</div>
+      </div>
+      <div class="gal-photo-card">
+        <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=500&q=80" alt="Skin Care" loading="lazy"/>
+        <div class="gal-photo-label">Skin Care</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Instagram CTA -->
+  <div class="gal-cta">
+    <p>See more of our work on <span>@lookssalonlk</span></p>
+    <a href="https://www.instagram.com/lookssalonlk/" target="_blank" class="btn-g">Follow on Instagram</a>
+  </div>
+</div>
+
+
+<!-- ══ TESTIMONIALS ══ -->
+<section class="test-section">
+  <div class="test-head">
+    <h2 class="st">What They <em>Say</em></h2>
+  </div>
+
+  <div class="test-carousel-wrap">
+    <div class="test-carousel" id="testCarousel">
+
+      <div class="test-card">
+        <span class="slide-quote">"</span>
+        <p class="slide-text">Best salon in Maharagama. The barbers really know what they're doing — my fade has never looked this clean. Highly recommend to everyone!</p>
+        <div class="slide-author">Kavindu S.</div>
+        <div class="slide-stars">
+          <span class="slide-star">★</span><span class="slide-star">★</span><span class="slide-star">★</span><span class="slide-star">★</span><span class="slide-star">★</span>
+        </div>
+      </div>
+
+      <div class="test-card">
+        <span class="slide-quote">"</span>
+        <p class="slide-text">I came for a hair treatment and left absolutely amazed. The staff is super friendly and the results speak for themselves. Will definitely come back!</p>
+        <div class="slide-author">Nimasha P.</div>
+        <div class="slide-stars">
+          <span class="slide-star">★</span><span class="slide-star">★</span><span class="slide-star">★</span><span class="slide-star">★</span><span class="slide-star">★</span>
+        </div>
+      </div>
+
+      <div class="test-card">
+        <span class="slide-quote">"</span>
+        <p class="slide-text">Got my bridal makeup done here and it was absolutely perfect. Looked stunning on my big day. 100% recommend Looks Salon to every bride!</p>
+        <div class="slide-author">Sandali R.</div>
+        <div class="slide-stars">
+          <span class="slide-star">★</span><span class="slide-star">★</span><span class="slide-star">★</span><span class="slide-star">★</span><span class="slide-star">★</span>
+        </div>
+      </div>
+
+      <div class="test-card">
+        <span class="slide-quote">"</span>
+        <p class="slide-text">The colour treatment I got was incredible. They really understood what I wanted and delivered beyond my expectations. Amazing team!</p>
+        <div class="slide-author">Dilanka M.</div>
+        <div class="slide-stars">
+          <span class="slide-star">★</span><span class="slide-star">★</span><span class="slide-star">★</span><span class="slide-star">★</span><span class="slide-star">★</span>
+        </div>
+      </div>
+
+      <div class="test-card">
+        <span class="slide-quote">"</span>
+        <p class="slide-text">Great vibe, great staff, great results. My beard has never been this sharp. This is the only salon I trust in Maharagama now!</p>
+        <div class="slide-author">Tharindu K.</div>
+        <div class="slide-stars">
+          <span class="slide-star">★</span><span class="slide-star">★</span><span class="slide-star">★</span><span class="slide-star">★</span><span class="slide-star">★</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Dots -->
+  <div class="slider-dots" id="sliderDots">
+    <button class="dot active"></button>
+    <button class="dot"></button>
+    <button class="dot"></button>
+    <button class="dot"></button>
+    <button class="dot"></button>
+  </div>
+
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer id="contact">
+  <div class="f-top-strip"></div>
+  <div class="f-watermark">LOOKS</div>
+
+  <div class="f-main">
+
+    <!-- Brand col -->
+    <div class="f-col-inner">
+      <a href="#" class="f-logo-wrap">
+        <div class="f-logo-box">
+                <img src="assets/images/logo.jpg" alt="Looks Salon Logo" width="65">
+        </div>
+        <div>
+          <span class="f-logo-name">Looks</span>
+          <span class="f-logo-sub">Salon</span>
+        </div>
+      </a>
+      <p class="f-tagline">Maharagama&apos;s premier hair &amp; beauty destination. Where precision meets passion and every visit is a transformation.</p>
+      <div class="f-socials">
+        <a href="https://www.instagram.com/lookssalonlk/" target="_blank" class="f-soc" title="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@lookssalonlk" target="_blank" class="f-soc" title="TikTok">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+        </a>
+        <a href="tel:+94112160770" class="f-soc" title="Call Us">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6 6l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+        <a href="https://maps.google.com/?q=259+High+Level+Road+Maharagama+Sri+Lanka" target="_blank" class="f-soc" title="Google Maps">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick links col -->
+    <div class="f-col-inner">
+      <span class="f-col-title">Quick Links</span>
+      <a href="#home" class="f-link">Home</a>
+      <a href="#about" class="f-link">About Us</a>
+      <a href="#services" class="f-link">Services</a>
+      <a href="#gallery" class="f-link">Gallery</a>
+      <a href="#contact" class="f-link">Contact</a>
+    </div>
+
+<!-- Contact col -->
+    <div class="f-col-inner" style="padding-right:0;">
+      <span class="f-col-title">Contact Us</span>
+
+      <div class="f-info-item">
+        <div class="f-info-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <span class="f-info-label">Opening Hours</span>
+          <div class="f-info-val">Mon – Sun: 9:00am – 8:00pm</div>
+        </div>
+      </div>
+
+      <div class="f-info-item">
+        <div class="f-info-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <span class="f-info-label">Our Location</span>
+          <div class="f-info-val">259, High Level Road,<br/>Maharagama, Sri Lanka</div>
+        </div>
+      </div>
+
+      <div class="f-info-item">
+        <div class="f-info-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6 6l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div>
+          <span class="f-info-label">Our Phone</span>
+          <div class="f-info-val">
+            <a href="tel:+94112160770">0112 160 770</a><br/>
+            <a href="tel:+94757705308">075 770 5308</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="f-info-item">
+        <div class="f-info-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </div>
+        <div>
+          <span class="f-info-label">Follow Us</span>
+          <div class="f-info-val"><a href="https://www.instagram.com/lookssalonlk/" target="_blank">@lookssalonlk</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="f-divider"></div>
+  <div class="f-bottom-divider"></div>
+
+  <div class="f-bottom">
+    <div class="f-copy">© 2025 <span>Looks Salon</span> · All Rights Reserved · Maharagama, Sri Lanka</div>
+
+  </div>
+  
+</footer>
+<script>
+  // Horizontal Gallery Strip — auto-scroll + mouse drag + touch swipe
+  document.addEventListener('DOMContentLoaded', () => {
+    const strip = document.getElementById('galStrip');
+    if (!strip) return;
+
+    // ── Track current translation manually so drag/touch can pick up where the CSS animation left off ──
+    let currentX = 0;       // current translateX offset (negative = scrolled right)
+    let animating = true;
+    let lastTime = null;
+    const SPEED = 0.04;     // px per ms  (increase to speed up)
+
+    // Total width of one set (half the strip, since content is duplicated)
+    const getHalfWidth = () => strip.scrollWidth / 2;
+
+    // Replace CSS animation with rAF loop so drag/touch can interop cleanly
+    strip.style.animation = 'none';
+    strip.style.transform = `translateX(0px)`;
+
+    function tick(ts) {
+      if (!lastTime) lastTime = ts;
+      const dt = ts - lastTime;
+      lastTime = ts;
+
+      if (animating) {
+        currentX -= SPEED * dt;
+        const half = getHalfWidth();
+        // Seamless loop: once we've scrolled one full set, jump back
+        if (Math.abs(currentX) >= half) {
+          currentX += half;
+        }
+        strip.style.transform = `translateX(${currentX}px)`;
+      }
+
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    // ── Shared drag logic ──
+    let dragging = false;
+    let dragStartX = 0;
+    let dragStartOffset = 0;
+
+    function onDragStart(clientX) {
+      dragging = true;
+      animating = false;
+      dragStartX = clientX;
+      dragStartOffset = currentX;
+    }
+
+    function onDragMove(clientX) {
+      if (!dragging) return;
+      const delta = clientX - dragStartX;
+      let next = dragStartOffset + delta;
+
+      // Keep within seamless bounds
+      const half = getHalfWidth();
+      if (next > 0) next -= half;
+      if (next < -half) next += half;
+
+      currentX = next;
+      strip.style.transform = `translateX(${currentX}px)`;
+    }
+
+    function onDragEnd() {
+      if (!dragging) return;
+      dragging = false;
+      animating = true;   // resume auto-scroll from current position
+      lastTime = null;    // reset timer so no jump
+    }
+
+    // ── Mouse events ──
+    strip.addEventListener('mousedown', e => {
+      e.preventDefault();
+      strip.style.cursor = 'grabbing';
+      onDragStart(e.clientX);
+    });
+    window.addEventListener('mouseup', () => {
+      if (!dragging) return;
+      strip.style.cursor = 'grab';
+      onDragEnd();
+    });
+    window.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      onDragMove(e.clientX);
+    });
+
+    // ── Touch events ──
+    strip.addEventListener('touchstart', e => {
+      onDragStart(e.touches[0].clientX);
+    }, { passive: true });
+    strip.addEventListener('touchmove', e => {
+      onDragMove(e.touches[0].clientX);
+    }, { passive: true });
+    strip.addEventListener('touchend', onDragEnd, { passive: true });
+
+    // ── Pause on hover (desktop) ──
+    strip.addEventListener('mouseenter', () => { if (!dragging) animating = false; });
+    strip.addEventListener('mouseleave', () => { if (!dragging) { animating = true; lastTime = null; } });
+  });
+
+  // 3-up Testimonial Carousel
+  document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.getElementById('testCarousel');
+    if (!carousel) return;
+
+    const cards = Array.from(carousel.querySelectorAll('.test-card'));
+    const dots  = Array.from(document.querySelectorAll('#sliderDots .dot'));
+    const total = cards.length;
+    let current = 0;
+    let autoInterval;
+
+    function goTo(n) {
+      current = (n + total) % total;
+
+      const wrap = carousel.parentElement;
+      const wrapW = wrap.offsetWidth;
+      const isMobile = window.innerWidth <= 960;
+      const cardW = carousel.querySelector('.test-card').offsetWidth;
+      const gap = isMobile ? 0 : 24;
+
+      let offset;
+      if (isMobile) {
+        // Show only active card, centred
+        offset = (wrapW / 2) - (current * (cardW + gap)) - (cardW / 2);
+        // On mobile dim everything except active
+        cards.forEach((c, i) => {
+          c.style.opacity = i === current ? '1' : '0';
+          c.style.pointerEvents = i === current ? '' : 'none';
+        });
+      } else {
+        offset = (wrapW / 2) - (current * (cardW + gap)) - (cardW / 2);
+        cards.forEach((c, i) => {
+          c.style.opacity = '';
+          c.style.pointerEvents = '';
+        });
+      }
+
+      carousel.style.transform = `translateX(${offset}px)`;
+      cards.forEach((c, i) => c.classList.toggle('active', i === current));
+      dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    function resetAuto() {
+      clearInterval(autoInterval);
+      autoInterval = setInterval(() => goTo(current + 1), 5000);
+    }
+
+    // Click a card to go to it
+    cards.forEach((card, i) => {
+      card.addEventListener('click', () => { goTo(i); resetAuto(); });
+    });
+
+    // Dots
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => { goTo(i); resetAuto(); });
+    });
+
+    // Arrows
+    document.getElementById('testPrev')?.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+    document.getElementById('testNext')?.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+
+    // Touch swipe on carousel
+    let touchStartX = 0;
+    carousel.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    carousel.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) { goTo(current + (diff > 0 ? 1 : -1)); resetAuto(); }
+    }, { passive: true });
+
+    // Init
+    goTo(0);
+    resetAuto();
+
+    // Recalculate on resize
+    window.addEventListener('resize', () => goTo(current));
+  });
+
+
+</script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
