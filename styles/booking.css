@@ -113,6 +113,7 @@ body::before {
   padding: 22px 32px 18px;
   border-bottom: 1px solid var(--border2);
   flex-shrink: 0;
+  margin-top: 1.8rem;
 }
 
 /* Breadcrumb */
@@ -704,7 +705,8 @@ body::before {
   cursor: pointer;
   transition: opacity .3s, transform .2s;
   clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-  margin-top: auto;
+  margin-top: 10px;
+
 }
 .continue-btn:hover:not(:disabled) { opacity: .85; transform: translateY(-1px); }
 .continue-btn:disabled { background: rgba(255,255,255,0.08); color: var(--muted); cursor: not-allowed; clip-path: none; }
@@ -725,4 +727,10 @@ body::before {
   .modal-body { flex-direction: column; }
   .modal-sidebar { width: 100%; border-left: none; border-top: 1px solid var(--border2); }
   .slots-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+.salon-card {
+    display: none;
+  }
 }
